@@ -75,7 +75,6 @@ export const LeafletMap = () => {
       className: 'no-shadow2',
     })
     if (parkingsAreLoaded && parkings) {
-      console.log(parkings)
       const temp = parkings.map((car) => (
         <MarkerComponent
           key={car.id}
@@ -107,7 +106,6 @@ export const LeafletMap = () => {
     })
 
     if (pointsOfInterestAreLoaded && pointsOfInterest) {
-      console.log(pointsOfInterest)
       const temp = pointsOfInterest.map((car) => (
         <MarkerComponent
           key={car.id}
