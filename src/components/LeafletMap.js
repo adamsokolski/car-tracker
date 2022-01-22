@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { renderToStaticMarkup } from 'react-dom/server'
 
@@ -13,6 +13,9 @@ const Container = styled.div`
 `
 
 export const LeafletMap = () => {
+  const [error, setError] = useState(null)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [items, setItems] = useState([])
   const position = [52.229, 21.011]
 
   const iconMarkup = renderToStaticMarkup(
@@ -23,21 +26,23 @@ export const LeafletMap = () => {
     className: 'blue-icon',
   })
 
-  const makeAPICall = async () => {
-    try {
-      const response = await fetch(
-        'https://dev.vozilla.pl/api-client-portal/map?objectType=VEHICLE',
-        { mode: 'cors' }
-      )
-      const data = await response.json()
-      console.log({ data })
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
   useEffect(() => {
-    makeAPICall()
+    fetch('/api-client-portal/map?objectType=VEHICLE')
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          setIsLoaded(true)
+          setItems(result)
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          setIsLoaded(true)
+          setError(error)
+        }
+      )
   }, [])
 
   return (
