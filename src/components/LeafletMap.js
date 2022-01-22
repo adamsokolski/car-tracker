@@ -7,6 +7,9 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { divIcon } from 'leaflet'
 
+// Components
+import { Error } from './Error'
+
 const Container = styled.div`
   width: 100%;
   height: 90vh;
@@ -68,6 +71,7 @@ export const LeafletMap = () => {
 
   return (
     <Container>
+      {error && <Error />}
       <MapContainer
         center={position}
         zoom={7}
