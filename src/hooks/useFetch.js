@@ -17,8 +17,8 @@ const useFetch = (url) => {
 
         (error) => {
           setIsLoaded(true)
-          setError(error.message)
-          console.log(error.message)
+          setError(error)
+          console.error(error)
         }
       )
   }, [url])
