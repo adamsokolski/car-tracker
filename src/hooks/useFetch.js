@@ -6,7 +6,10 @@ const useFetch = (url) => {
   const [error, setError] = useState(null)
   useEffect(() => {
     fetch(url)
-      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+        return res.json()
+      })
       .then(
         (result) => {
           setData(result.objects)
