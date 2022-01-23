@@ -7,6 +7,9 @@ import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { divIcon } from 'leaflet'
 
+import MarkerClusterGroup from 'react-leaflet-markercluster'
+import 'react-leaflet-markercluster/dist/styles.min.css'
+
 // Components
 import { Error } from './Error'
 import { MarkerComponent } from './MarkerComponent'
@@ -133,9 +136,11 @@ export const LeafletMap = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
         />
-        {vehiclesMarkers}
-        {parkingsMarkers}
-        {pointsOfInterestMarkers}
+        <MarkerClusterGroup>
+          {vehiclesMarkers}
+          {parkingsMarkers}
+          {pointsOfInterestMarkers}
+        </MarkerClusterGroup>
       </Map>
     </Container>
   )
