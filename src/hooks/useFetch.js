@@ -12,11 +12,13 @@ const useFetch = (url) => {
           setData(result.objects)
           setIsLoaded(true)
           setError(null)
+          console.log(result.objects)
         },
 
         (error) => {
           setIsLoaded(true)
           setError(error.message)
+          console.error(error.message)
         }
       )
   }, [url])
